@@ -11,7 +11,7 @@ import org.springframework.util.ObjectUtils;
 public class WebDriverUtil {
     private static final String WEB_DRIVER_PATH= "C:/chromedriver/chromedriver.exe";
 
-    public static WebDriver getChromeDriver(){
+    public  WebDriver getChromeDriver(){
         if (ObjectUtils.isEmpty(System.getProperty("webdriver.chrome.driver"))) {
             System.setProperty("webdriver.chrome.driver", WEB_DRIVER_PATH);
         }
@@ -24,11 +24,12 @@ public class WebDriverUtil {
         chromeOptions.addArguments("--disable-gpu");
 
         ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
-        chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+        chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofMinutes(10));
 
         return chromeDriver;
 
     }
+
     public static void quit(WebDriver driver) {
         if (!ObjectUtils.isEmpty(driver)) {
             driver.quit();
@@ -37,8 +38,7 @@ public class WebDriverUtil {
 
     public static void close(WebDriver driver) {
         if (!ObjectUtils.isEmpty(driver)) {
-            driver.close();    	}
+            driver.close();
+        }
     }
-
-
 }
